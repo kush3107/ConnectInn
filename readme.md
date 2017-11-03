@@ -1,6 +1,6 @@
 <p align="center"><h1>ConnectInn</h1></p>
 
-## About ConnectInn
+## About
 
 **Connecting Young Professionals For a Productive Future**
 
