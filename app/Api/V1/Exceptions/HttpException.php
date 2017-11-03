@@ -10,6 +10,8 @@ namespace App\Api\V1\Exceptions;
 
 class HttpException extends \Symfony\Component\HttpKernel\Exception\HttpException
 {
+    const INVALID_CREDENTIALS_EXCEPTION = 1;
+
     public function __construct($message, $errorCode, $statusCode = 422)
     {
         parent::__construct($statusCode, $message, null, array(), $errorCode);

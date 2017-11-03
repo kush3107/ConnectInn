@@ -17,4 +17,5 @@ $api->version('v1', function ($api) {
     $api->any('test', function () {
         return 'test';
     });
+    $api->get('authenticate', 'App\Api\V1\Controllers\AuthController@login');
 });
