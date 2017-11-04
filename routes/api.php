@@ -18,4 +18,5 @@ $api->version('v1', function ($api) {
         return 'test';
     });
     $api->get('authenticate', 'App\Api\V1\Controllers\AuthController@login');
+    $api->post('register', 'App\Api\V1\Controllers\UserController@store');
 });

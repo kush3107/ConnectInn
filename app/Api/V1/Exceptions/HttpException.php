@@ -11,6 +11,7 @@ namespace App\Api\V1\Exceptions;
 class HttpException extends \Symfony\Component\HttpKernel\Exception\HttpException
 {
     const INVALID_CREDENTIALS_EXCEPTION = 1;
+    const USER_ALREADY_EXISTS_EXCEPTION = 2;
 
     public function __construct($message, $errorCode, $statusCode = 422)
     {

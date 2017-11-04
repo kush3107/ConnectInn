@@ -9,7 +9,29 @@
 namespace App\Services;
 
 
+use App\Contracts\UserCreateContract;
+use App\User;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
 class UserService
 {
+    public static function find($id) {
+        $user = User::find($id);
 
+        if (is_null($user)) {
+            throw new NotFoundHttpException('User could not be found!');
+        }
+    }
+
+    public function create(UserCreateContract $contract) {
+        $user = new User();
+
+        $user->name     = $contract->getName();
+        $user->email    = $contract->getEmail();
+        $user->password = $contract->getPassword();
+
+        $user->save();
+
+        return $user;
+    }
 }
