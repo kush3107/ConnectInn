@@ -22,7 +22,7 @@ class ActivityTransformer extends TransformerAbstract
             'title' => $activity->title,
             'description' => $activity->description,
             'start' => $activity->start->toDateTimeString(),
-            'end' => $activity->end->toDateTimeString(),
+            'end' => $activity->end ? $activity->end->toDateTimeString() : null,
             'link' => $activity->link,
             'meta' => json_decode($activity->meta),
             'created_at' => $activity->created_at->toDateTimeString(),
