@@ -6,7 +6,7 @@
  * Time: 9:03 PM
  */
 
-use App\Contracts;
+namespace App\Contracts;
 
 interface UserUpdateContract{
 

@@ -14,6 +14,7 @@ use App\Api\V1\Requests\UserUpdateRequest;
 use App\Api\V1\Transformers\UserTransformer;
 use App\Services\UserService;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -36,13 +37,17 @@ class UserController extends Controller
     }
 
     public function show(){
-        $user = \Auth::User();
+        $user = Auth::User();
+        dd($user);
         return $this->response->item($user,new UserTransformer());
     }
 
     public function update(UserUpdateRequest $request){
 
-        $user = $this->userService->update($request);
+        $user = Auth::User();
+
+
+        $user = $this->userService->update($request,$user);
 
         return $this->response->item($user, new UserTransformer());
 

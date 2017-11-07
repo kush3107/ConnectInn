@@ -9,36 +9,32 @@
 namespace App\Api\V1\Requests;
 
 
-use PhpParser\Node\Name;
+use App\Contracts\UserUpdateContract;
+use Faker\Guesser\Name;
 
 class UserUpdateRequest extends Request implements UserUpdateContract
 {
 
     const NAME = 'name';
 
+
     public function rules()
     {
         return [
+
 
         ];
     }
     public function hasName()
     {
 
-        if(isNull(self::NAME))
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
+        return $this->has(self::NAME);
     }
 
     public function getName(){
-        if($this->hasName()==false)
-        {
+
             return $this->get(self::NAME);
-        }
+
+
     }
 }

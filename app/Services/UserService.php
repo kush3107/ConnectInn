@@ -10,7 +10,7 @@ namespace App\Services;
 
 
 use App\Contracts\UserCreateContract;
-use App\Contracts\UserUpdateContarct;
+use App\Contracts\UserUpdateContract;
 use App\User;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -36,10 +36,11 @@ class UserService
         return $user;
     }
 
-    public function update(UserUpdateContract $contract){
-        $user = new User();
+    public function update(UserUpdateContract $contract,User $user){
 
-        $user->name = $contract->getName();
+        if($contract->hasName()){
+            $user->name = $contract->getName();
+        }
         $user->save();
 
         return $user;
