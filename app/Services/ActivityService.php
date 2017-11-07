@@ -16,6 +16,10 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ActivityService
 {
+    /**
+     * @param $id
+     * @return Activity
+     */
     public static function find($id)
     {
         $activity = Activity::find($id);
