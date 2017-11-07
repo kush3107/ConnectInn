@@ -16,6 +16,7 @@ $api = app('Dingo\Api\Routing\Router');
 $api->version('v1', function ($api) {
     $api->get('authenticate', 'App\Api\V1\Controllers\AuthController@login');
     $api->post('register', 'App\Api\V1\Controllers\UserController@store');
+
 });
 
 $api->version('v1', ['middleware' => 'api.auth'], function ($api) {
@@ -23,4 +24,6 @@ $api->version('v1', ['middleware' => 'api.auth'], function ($api) {
     $api->post('users/{user}/un-follow', 'App\Api\V1\Controllers\UserController@unfollow');
     $api->get('followers', 'App\Api\V1\Controllers\UserController@listFollowers');
     //
+    $api->get('me','App\Api\V1\Controllers\UserController@show');
+    $api->patch('me','App\Api\V1\Controllers\UserController@update');
 });
