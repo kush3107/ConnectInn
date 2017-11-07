@@ -10,6 +10,7 @@ namespace App\Api\V1\Controllers;
 
 use App\Api\V1\Exceptions\UserAlreadyExistsException;
 use App\Api\V1\Requests\UserCreateRequest;
+use App\Api\V1\Requests\UserUpdateRequest;
 use App\Api\V1\Transformers\UserTransformer;
 use App\Services\UserService;
 use App\User;
@@ -37,5 +38,13 @@ class UserController extends Controller
     public function show(){
         $user = \Auth::User();
         return $this->response->item($user,new UserTransformer());
+    }
+
+    public function update(UserUpdateRequest $request){
+
+        $user = $this->userService->update($request);
+
+        return $this->response->item($user, new UserTransformer());
+
     }
 }

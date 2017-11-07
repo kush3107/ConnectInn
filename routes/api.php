@@ -16,6 +16,7 @@ $api = app('Dingo\Api\Routing\Router');
 $api->version('v1', function ($api) {
     $api->get('authenticate', 'App\Api\V1\Controllers\AuthController@login');
     $api->post('register', 'App\Api\V1\Controllers\UserController@store');
+    $api->patch('update','App\Api\V1\Controllers\UserController@update');
 
 });
 
