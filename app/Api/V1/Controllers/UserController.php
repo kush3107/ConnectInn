@@ -33,4 +33,18 @@ class UserController extends Controller
 
         return $this->response->item($user, new UserTransformer());
     }
+
+    public function follow($user)
+    {
+        $authUser = \Auth::user();
+
+        $authUser->followers()->attach($user);
+    }
+
+    public function unfollow($user)
+    {
+        $authUser = \Auth::user();
+
+        $authUser->followers()->detach($user);
+    }
 }
