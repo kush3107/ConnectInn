@@ -19,7 +19,7 @@ class CreateActivitiesTable extends Migration
             $table->longText('description')->nullable();
 
             $table->timestamp('start');
-            $table->timestamp('end');
+            $table->timestamp('end')->nullable();
             $table->enum('type', [
                 'project',
                 'competition',
@@ -33,8 +33,8 @@ class CreateActivitiesTable extends Migration
                 'volunteer',
                 'publication'
             ]);
-            $table->string('link');
-            $table->json('meta');
+            $table->string('link')->nullable();
+            $table->json('meta')->nullable();
 
             $table->timestamps();
         });
