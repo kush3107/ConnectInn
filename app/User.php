@@ -65,7 +65,7 @@ class User extends Authenticatable implements JWTSubject
      */
     public function getJWTIdentifier()
     {
-        return 'id';
+        return $this->getKey();
     }
 
     /**
@@ -75,7 +75,9 @@ class User extends Authenticatable implements JWTSubject
      */
     public function getJWTCustomClaims()
     {
-        return [];
+        return [
+            //
+        ];
     }
 
     // Relationship Methods
