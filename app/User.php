@@ -7,27 +7,38 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
+
 /**
  * App\User
  *
  * @property int $id
  * @property string $name
  * @property string $email
+ * @property string|null $phone
+ * @property string|null $profile_pic
+ * @property string|null $about
+ * @property int|null $rating
+ * @property \Carbon\Carbon|null $date_of_birth
  * @property string $password
  * @property string|null $remember_token
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Activity[] $activities
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $followers
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereAbout($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereDateOfBirth($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereProfilePic($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRating($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
  * @mixin \Eloquent
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Activity[] $activities
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $followers
  */
 class User extends Authenticatable implements JWTSubject
 {
@@ -49,6 +60,12 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $hidden = [
         'password', 'remember_token',
+    ];
+
+    protected $dates = [
+        'date_of_birth',
+        'created_at',
+        'updated_at'
     ];
 
     /**
