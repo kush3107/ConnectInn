@@ -10,6 +10,7 @@ namespace App\Services;
 
 use App\Activity;
 use App\Contracts\ActivityCreateContract;
+use App\Contracts\ActivityUpdateContract;
 use App\User;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -64,5 +65,37 @@ class ActivityService
             'role' => $role,
             'is_owner' => $isOwner
         ]);
+    }
+
+    public function update(ActivityUpdateContract $contract , $activity){
+        $activity = ActivityService::find($activity);
+
+        if($contract->hasTitle()){
+            $activity->title = $contract->getTitle();
+        }
+
+        if($contract->hasDescription()){
+            $activity->description = $contract->getDescription();
+        }
+
+        if($contract->hasStart()){
+            $activity->start = $contract->getStart();
+        }
+
+        if($contract->hasEnd()){
+            $activity->end = $contract->getEnd();
+        }
+
+        if($contract->hasLink()){
+            $activity->link = $contract->getLink();
+        }
+
+        if($contract->hasMeta()){
+            $activity->meta = $contract->getMeta();
+        }
+
+        $activity->save();
+
+        return $activity;
     }
 }

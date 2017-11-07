@@ -9,7 +9,9 @@
 namespace App\Api\V1\Controllers;
 
 
+use App\Activity;
 use App\Api\V1\Requests\ActivityCreateRequest;
+use App\Api\V1\Requests\ActivityUpdateRequest;
 use App\Api\V1\Transformers\ActivityTransformer;
 use App\Services\ActivityService;
 use Auth;
@@ -35,5 +37,12 @@ class ActivityController extends Controller
         $activity = $this->activityService->create($request, Auth::user());
 
         return $this->response->item($activity, new ActivityTransformer());
+    }
+
+    public function update(ActivityUpdateRequest $request, $activity)
+    {
+        $activityUpdate = $this->activityService->update($request, $activity);
+
+        return $this->response->item($activityUpdate, new ActivityTransformer());
     }
 }
