@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Services\UserService;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
@@ -39,6 +40,24 @@ class Activity extends Model
         'created_at',
         'updated_at'
     ];
+
+    // Helper Methods
+
+    public function getOwner()
+    {
+        $owner = $this->users()->wherePivot('is_owner', true)->get();
+
+        return $owner;
+    }
+
+    public function isOwner($user)
+    {
+        if (!$user instanceof User) {
+            $user = $user->id;
+        }
+
+        return (boolean)$this->users()->wherePivot('user_id', $user->id)->value('is_owner');
+    }
 
     public function users()
     {

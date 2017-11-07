@@ -26,6 +26,10 @@ class ActivityService
         return $activity;
     }
 
+    /**
+     * @param $userId
+     * @return Activity[]|\Illuminate\Database\Eloquent\Collection|mixed
+     */
     public static function getListsBy($userId)
     {
         $user = UserService::find($userId);

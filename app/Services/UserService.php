@@ -16,6 +16,10 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class UserService
 {
+    /**
+     * @param $id
+     * @return User
+     */
     public static function find($id) {
         $user = User::find($id);
 
