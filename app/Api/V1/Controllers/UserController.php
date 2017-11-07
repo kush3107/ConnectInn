@@ -33,4 +33,9 @@ class UserController extends Controller
 
         return $this->response->item($user, new UserTransformer());
     }
+
+    public function show(){
+        $user = \Auth::User();
+        return $this->response->item($user,new UserTransformer());
+    }
 }
