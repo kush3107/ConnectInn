@@ -14,8 +14,12 @@ use League\Fractal\TransformerAbstract;
 
 class ActivityTransformer extends TransformerAbstract
 {
+    protected $availableIncludes = ['users'];
+
     public function transform(Activity $activity)
     {
+        $status = is_null($activity->end) ? 'ongoing' : 'finished';
+
         return [
             'id' => (int)$activity->id,
             'type' => $activity->type,
@@ -23,10 +27,16 @@ class ActivityTransformer extends TransformerAbstract
             'description' => $activity->description,
             'start' => $activity->start->toDateTimeString(),
             'end' => $activity->end ? $activity->end->toDateTimeString() : null,
+            'status' => $status,
             'link' => $activity->link,
             'meta' => json_decode($activity->meta),
             'created_at' => $activity->created_at->toDateTimeString(),
             'updated_at' => $activity->updated_at->toDateTimeString(),
         ];
+    }
+
+    public function includeUsers(Activity $activity)
+    {
+        return $this->collection($activity->users, new UserTransformer());
     }
 }
