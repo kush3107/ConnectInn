@@ -59,9 +59,7 @@ class UserController extends Controller
 
     public function update(UserUpdateRequest $request)
     {
-
         $user = Auth::User();
-
 
         $user = $this->userService->update($request, $user);
 

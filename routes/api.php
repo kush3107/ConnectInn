@@ -26,4 +26,7 @@ $api->version('v1', ['middleware' => 'api.auth'], function ($api) {
     //
     $api->get('me','App\Api\V1\Controllers\UserController@show');
     $api->patch('me','App\Api\V1\Controllers\UserController@update');
+
+    // Activity Related
+    $api->resource('activities', 'App\Api\V1\Controllers\ActivityController', ['only' => ['index', 'update', 'store', 'delete']]);
 });

@@ -22,6 +22,8 @@ class UserService
         if (is_null($user)) {
             throw new NotFoundHttpException('User could not be found!');
         }
+
+        return $user;
     }
 
     public function create(UserCreateContract $contract) {

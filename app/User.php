@@ -26,6 +26,8 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Activity[] $activities
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $followers
  */
 class User extends Authenticatable implements JWTSubject
 {
@@ -85,5 +87,10 @@ class User extends Authenticatable implements JWTSubject
     public function followers()
     {
         return $this->belongsToMany(User::class, 'followers', 'user_id', 'follower_id')->withTimestamps();
+    }
+
+    public function activities()
+    {
+        return $this->belongsToMany(Activity::class);
     }
 }
