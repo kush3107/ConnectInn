@@ -47,4 +47,11 @@ class UserController extends Controller
 
         $authUser->followers()->detach($user);
     }
+
+    public function listFollowers()
+    {
+        $followers = \Auth::user()->followers;
+
+        return $this->response->collection($followers, new UserTransformer());
+    }
 }

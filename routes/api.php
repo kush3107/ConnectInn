@@ -21,5 +21,6 @@ $api->version('v1', function ($api) {
 $api->version('v1', ['middleware' => 'api.auth'], function ($api) {
     $api->post('users/{user}/follow', 'App\Api\V1\Controllers\UserController@follow');
     $api->post('users/{user}/un-follow', 'App\Api\V1\Controllers\UserController@unfollow');
+    $api->get('followers', 'App\Api\V1\Controllers\UserController@listFollowers');
     //
 });
