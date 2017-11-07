@@ -21,17 +21,17 @@ class ActivityTransformer extends TransformerAbstract
         $status = is_null($activity->end) ? 'ongoing' : 'finished';
 
         return [
-            'id' => (int)$activity->id,
-            'type' => $activity->type,
-            'title' => $activity->title,
-            'description' => $activity->description,
-            'start' => $activity->start->toDateTimeString(),
-            'end' => $activity->end ? $activity->end->toDateTimeString() : null,
-            'status' => $status,
-            'link' => $activity->link,
-            'meta' => json_decode($activity->meta),
-            'created_at' => $activity->created_at->toDateTimeString(),
-            'updated_at' => $activity->updated_at->toDateTimeString(),
+            'id'            => (int)$activity->id,
+            'type'          => $activity->type,
+            'title'         => $activity->title,
+            'description'   => $activity->description,
+            'start'         => $activity->start->toDateTimeString(),
+            'end'           => $activity->end ? $activity->end->toDateTimeString() : null,
+            'status'        => $status,
+            'link'          => $activity->link,
+            'meta'          => json_decode($activity->meta),
+            'created_at'    => $activity->created_at->toDateTimeString(),
+            'updated_at'    => $activity->updated_at->toDateTimeString(),
         ];
     }
 
