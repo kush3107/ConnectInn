@@ -10,6 +10,7 @@ namespace App\Api\V1\Requests;
 
 
 use App\Contracts\ActivityCreateContract;
+use App\Services\ActivityService;
 
 class ActivityCreateRequest extends Request implements ActivityCreateContract
 {

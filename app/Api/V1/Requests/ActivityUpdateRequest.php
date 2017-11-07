@@ -10,6 +10,8 @@ namespace App\Api\V1\Requests;
 
 
 use App\Contracts\ActivityUpdateContract;
+use App\Services\ActivityService;
+use Auth;
 
 class ActivityUpdateRequest extends Request implements ActivityUpdateContract
 
@@ -21,6 +23,15 @@ class ActivityUpdateRequest extends Request implements ActivityUpdateContract
     const TYPE = 'type';
     const LINK = 'link';
     const META = 'meta';
+
+    public function authorize()
+    {
+        $user = Auth::user();
+        $activityId = $this->route('activity');
+        $activity = ActivityService::find($activityId);
+
+        return $activity->isOwner($user);
+    }
 
     public function rules()
     {
