@@ -18,7 +18,7 @@ class CreateActivityUserTable extends Migration
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('activity_id');
             $table->boolean('is_owner');
-            $table->string('role');
+            $table->string('role')->nullable();
 
             $table->timestamps();
 
