@@ -19,6 +19,10 @@ class CreateInvitationsTable extends Migration
             $table->unsignedInteger('sender_id');
             $table->unsignedInteger('user_id');
 
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('sender_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('activity_id')->references('id')->on('activities')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
