@@ -26,6 +26,8 @@ $api->version('v1', ['middleware' => 'api.auth'], function ($api) {
     //
     $api->get('me','App\Api\V1\Controllers\UserController@show');
     $api->patch('me','App\Api\V1\Controllers\UserController@update');
+    $api->get('me/pending-invitations','App\Api\V1\Controllers\UserController@pendingInvitations');
+    $api->get('me/sent-invitations','App\Api\V1\Controllers\UserController@sentInvitations');
 
     // Activity Related
     $api->resource('activities', 'App\Api\V1\Controllers\ActivityController', ['only' => ['index', 'update', 'store', 'delete']]);
