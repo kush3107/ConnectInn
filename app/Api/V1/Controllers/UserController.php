@@ -9,13 +9,16 @@
 namespace App\Api\V1\Controllers;
 
 use App\Api\V1\Exceptions\UserAlreadyExistsException;
+use App\Api\V1\Requests\UserAddProfilePicRequest;
 use App\Api\V1\Requests\UserCreateRequest;
 use App\Api\V1\Requests\UserUpdateRequest;
 use App\Api\V1\Transformers\InvitationTransformer;
 use App\Api\V1\Transformers\UserTransformer;
+use App\Facades\Uploader;
 use App\Services\UserService;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
 class UserController extends Controller
 {
@@ -82,5 +85,25 @@ class UserController extends Controller
     public function sentInvitations()
     {
         return $this->response->collection(Auth::user()->sentInvitations, new InvitationTransformer());
+    }
+
+    public function uploadProfilePic(UserAddProfilePicRequest $request)
+    {
+        $user = Auth::user();
+
+        $thumbnail = $request->getImage();
+        $unique    = uniqid();
+        $url       = 'connectInn/avatars/' . $unique . $user->id . '.' . $thumbnail->getClientOriginalExtension();
+
+        try {
+            $uploadedURL = Uploader::upload($thumbnail, $url);
+        } catch (\Exception $e) {
+            throw new UnprocessableEntityHttpException("Some Error Occured");
+        }
+
+        $user->profile_pic = $uploadedURL;
+        $user->save();
+
+        return $this->response->item($user, new UserTransformer);
     }
 }
