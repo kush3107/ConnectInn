@@ -10,6 +10,7 @@ namespace App\Api\V1\Controllers;
 
 
 use App\Services\InvitationService;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class InvitationController extends Controller
 {
@@ -22,6 +23,23 @@ class InvitationController extends Controller
 
     public function accept($invitation)
     {
+        $invitation = InvitationService::find($invitation);
+
+        if ($invitation->receiver->id != \Auth::id()) {
+            throw new UnauthorizedHttpException('You are not authorized for the action');
+        }
+
         $this->invitationService->accept($invitation);
+    }
+
+    public function reject($invitation)
+    {
+        $invitation = InvitationService::find($invitation);
+
+        if ($invitation->receiver->id != \Auth::id()) {
+            throw new UnauthorizedHttpException('You are not authorized for the action');
+        }
+
+        $invitation->delete();
     }
 }

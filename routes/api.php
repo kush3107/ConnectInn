@@ -34,4 +34,5 @@ $api->version('v1', ['middleware' => 'api.auth'], function ($api) {
     $api->post('activities/{activity}/invite-by-email', 'App\Api\V1\Controllers\ActivityController@inviteByEmail');
 
     $api->post('accept-invitation/{invitation}', 'App\Api\V1\Controllers\InvitationController@accept');
+    $api->post('reject-invitation/{invitation}', 'App\Api\V1\Controllers\InvitationController@reject');
 });
