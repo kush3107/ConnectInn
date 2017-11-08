@@ -56,12 +56,12 @@ class ActivityService
 
         $activity->save();
 
-        $this->attachUserToActivity($activity->id, $user->id, 'owner', true);
+        ActivityService::attachUserToActivity($activity->id, $user->id, 'owner', true);
 
         return $activity;
     }
 
-    public function attachUserToActivity($activityId, $userId, $role, $isOwner = false)
+    public static function attachUserToActivity($activityId, $userId, $role = null, $isOwner = false)
     {
         $activity = ActivityService::find($activityId);
 

@@ -43,4 +43,16 @@ class InvitationService
 
         return $invitation;
     }
+
+    public function accept($invitation)
+    {
+        $invitation = InvitationService::find($invitation);
+
+        $activity = $invitation->activity;
+        $receiver = $invitation->receiver;
+
+        ActivityService::attachUserToActivity($activity->id, $receiver->id);
+
+        $invitation->delete();
+    }
 }
