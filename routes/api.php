@@ -32,7 +32,7 @@ $api->version('v1', ['middleware' => 'api.auth'], function ($api) {
 
     // Activity Related
     $api->resource('activities', 'App\Api\V1\Controllers\ActivityController', ['only' => ['index', 'update', 'store', 'delete']]);
-    $api->post('activities/{activity}/invite-by-email', 'App\Api\V1\Controllers\ActivityController@inviteByEmail');
+    $api->post('activities/{activity}/invite-by-email', 'App\Api\V1\Controllers\ActivityUserController@inviteByEmail');
 
     $api->post('accept-invitation/{invitation}', 'App\Api\V1\Controllers\InvitationController@accept');
     $api->post('reject-invitation/{invitation}', 'App\Api\V1\Controllers\InvitationController@reject');
