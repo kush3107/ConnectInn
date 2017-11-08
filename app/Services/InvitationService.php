@@ -9,6 +9,7 @@
 namespace App\Services;
 
 
+use App\Api\V1\Exceptions\UserAlreadyInActivityException;
 use App\Invitation;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -32,6 +33,10 @@ class InvitationService
     public function create($senderId, $receiverId, $activityId)
     {
         $activity = ActivityService::find($activityId);
+
+        if ($activity->users()->wherePivot('user_id', $receiverId)->exists()) {
+            throw new UserAlreadyInActivityException();
+        }
 
         $invitation = new Invitation();
 
