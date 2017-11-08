@@ -39,6 +39,8 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Invitation[] $pendingInvitations
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Invitation[] $sentInvitations
  */
 class User extends Authenticatable implements JWTSubject
 {
@@ -109,5 +111,15 @@ class User extends Authenticatable implements JWTSubject
     public function activities()
     {
         return $this->belongsToMany(Activity::class);
+    }
+
+    public function sentInvitations()
+    {
+        return $this->hasMany(Invitation::class, 'sender_id');
+    }
+
+    public function pendingInvitations()
+    {
+        return $this->hasMany(Invitation::class, 'user_id');
     }
 }

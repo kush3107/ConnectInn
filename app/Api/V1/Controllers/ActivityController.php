@@ -9,11 +9,13 @@
 namespace App\Api\V1\Controllers;
 
 
-use App\Activity;
 use App\Api\V1\Requests\ActivityCreateRequest;
 use App\Api\V1\Requests\ActivityUpdateRequest;
+use App\Api\V1\Requests\InvitationByEmailRequest;
 use App\Api\V1\Transformers\ActivityTransformer;
 use App\Services\ActivityService;
+use App\Services\InvitationService;
+use App\User;
 use Auth;
 
 class ActivityController extends Controller
@@ -44,5 +46,13 @@ class ActivityController extends Controller
         $activityUpdate = $this->activityService->update($request, $activity);
 
         return $this->response->item($activityUpdate, new ActivityTransformer());
+    }
+
+    public function inviteByEmail(InvitationByEmailRequest $request, $activity)
+    {
+        $invitationService = new InvitationService();
+        $receiver = User::where('email', $request->getEmail())->first();
+
+        $invitationService->create(Auth::id(), $receiver->id, $activity);
     }
 }
