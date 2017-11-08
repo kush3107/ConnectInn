@@ -23,7 +23,7 @@ class UserTransformer extends TransformerAbstract
             'name'              => $user->name,
             'email'             => $user->email,
             'phone'             => $user->phone,
-            'rating'            => (int)$user->rating,
+            'rating'            => $user->rating,
             'profile_pic'       => $user->profile_pic,
             'date_of_birth'     => $user->date_of_birth ? $user->date_of_birth->toDateTimeString() : null,
             'created_at'        => $user->created_at->toDateTimeString(),
