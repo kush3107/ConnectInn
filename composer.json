@@ -9,8 +9,10 @@
         "dingo/api": "2.0.0-alpha1",
         "doctrine/dbal": "^2.5",
         "fideloper/proxy": "~3.3",
+        "giggsey/libphonenumber-for-php": "^7.6",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
+        "php-curl-class/php-curl-class": "^8.0",
         "tymon/jwt-auth": "dev-develop"
     },
     "require-dev": {
