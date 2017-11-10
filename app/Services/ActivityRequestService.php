@@ -53,9 +53,6 @@ class ActivityRequestService
 
     public function accept($activityrequest)
     {
-
-        $activityrequest = ActivityRequestService::find($activityrequest);
-
         $activity = $activityrequest->activity;
         $sender = $activityrequest->sender;
 
