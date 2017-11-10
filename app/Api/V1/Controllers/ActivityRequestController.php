@@ -9,7 +9,6 @@
 namespace App\Api\V1\Controllers;
 
 
-
 use App\Activity;
 use App\Services\ActivityRequestService;
 use App\Services\ActivityService;
@@ -25,23 +24,22 @@ class ActivityRequestController extends Controller
         $this->activityrequestService = new ActivityRequestService();
     }
 
-    public function request($activityId){
+    public function request($activityId)
+    {
 
         $activity = ActivityService::find($activityId);
 
-        $var = $this->activityrequestService->create(\Auth::id(),$activity);
-
-        dd($var);
-
+        $this->activityrequestService->create(\Auth::id(), $activity);
     }
 
-    public function accept($activityrequest){
+    public function accept($activityrequest)
+    {
 
         $activityrequest = ActivityRequestService::find($activityrequest);
 
         $activity = Activity::find($activityrequest->activity->id);
 
-        if(!$activity->isOwner(\Auth::user())){
+        if (!$activity->isOwner(\Auth::user())) {
             throw new UnauthorizedHttpException('You are not authorized for the action');
         }
 
@@ -49,8 +47,8 @@ class ActivityRequestController extends Controller
 
     }
 
-    public function reject($activityrequest){
-
+    public function reject($activityrequest)
+    {
 
 
         $this->activityrequestService->reject($activityrequest);

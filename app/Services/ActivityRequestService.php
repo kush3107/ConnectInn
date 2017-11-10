@@ -9,65 +9,64 @@
 namespace App\Services;
 
 
-
-use App\Api\V1\Exceptions\UserAlreadyInActivityException;
-use App\Api\V1\Exceptions\UserAlreadySentRequestException;
 use App\Activity;
 use App\ActivityRequest;
+use App\Api\V1\Exceptions\UserAlreadyInActivityException;
+use App\Api\V1\Exceptions\UserAlreadySentRequestException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ActivityRequestService
 {
 
-    public static function find($id){
+    public static function find($id)
+    {
 
         $activityrequest = ActivityRequest::find($id);
-        if(is_null($activityrequest)){
+        if (is_null($activityrequest)) {
             throw new NotFoundHttpException('ActivityRequest Not found');
         }
 
         return $activityrequest;
     }
 
-    public function create($senderId,$activityId)
+    public function create($senderId, Activity $activity)
     {
-
-        $activity = ActivityService::find($activityId);
-
         if ($activity->users()->wherePivot('user_id', $senderId)->exists()) {
             throw new UserAlreadyInActivityException();
         }
 
-        if(ActivityRequest::where('sender_id',$senderId)
-        ->where('activity_id',$activityId)
-        ->exists()){
+        if (ActivityRequest::where('sender_id', $senderId)
+            ->where('activity_id', $activity)
+            ->exists()) {
             throw new UserAlreadySentRequestException();
         }
 
         $activityRequest = new ActivityRequest();
 
-        $activityRequest->sender_id     = $senderId;
-        $activityRequest->activity_id   = $activity->id;
+        $activityRequest->sender_id = $senderId;
+        $activityRequest->activity_id = $activity->id;
 
         $activityRequest->save();
 
         return $activityRequest;
     }
 
-    public function accept($activityrequest){
+    public function accept($activityrequest)
+    {
 
         $activityrequest = ActivityRequestService::find($activityrequest);
 
         $activity = $activityrequest->activity;
         $sender = $activityrequest->sender;
 
-        ActivityService::attachUserToActivity($activity->id,$sender->id);
+        ActivityService::attachUserToActivity($activity->id, $sender->id);
 
         $activityrequest->delete();
 
     }
 
-    public function reject($activityrequest){
+    public function reject($activityrequest)
+    {
 
         $activityrequest = ActivityRequestService::find($activityrequest);
 
