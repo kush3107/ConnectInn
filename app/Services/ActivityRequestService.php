@@ -32,8 +32,7 @@ class ActivityRequestService
     public function create($senderId,$activityId)
     {
 
-        $activity = Activity::find($activityId);
-        dd($activity->users());
+        $activity = ActivityService::find($activityId);
 
         if ($activity->users()->wherePivot('user_id', $senderId)->exists()) {
             throw new UserAlreadyInActivityException();
@@ -45,14 +44,14 @@ class ActivityRequestService
             throw new UserAlreadySentRequestException();
         }
 
-        $activityrequest = new ActivityRequest();
+        $activityRequest = new ActivityRequest();
 
-        $activityrequest->sender_id = $senderId;
-        $activityrequest->activity_id = $activity->id;
+        $activityRequest->sender_id     = $senderId;
+        $activityRequest->activity_id   = $activity->id;
 
-        $activityrequest->save();
+        $activityRequest->save();
 
-        return $activityrequest;
+        return $activityRequest;
     }
 
     public function accept($activityrequest){
