@@ -18,7 +18,7 @@ class CreateActivityRequestsTable extends Migration
             $table->unsignedInteger('activity_id');
             $table->unsignedInteger('sender_id');
 
-            $table->foreign('activity_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('activity_id')->references('id')->on('activities')->onDelete('cascade');
             $table->foreign('sender_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->timestamps();

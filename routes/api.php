@@ -38,7 +38,7 @@ $api->version('v1', ['middleware' => 'api.auth'], function ($api) {
     $api->post('reject-invitation/{invitation}', 'App\Api\V1\Controllers\InvitationController@reject');
 
                       /*Activity Request*/
-    $api->post('activityrequest/{activity}/request','App\Api\V1\Controller\ActivityRequestController@request');
-    $api->post('activityrequest/{requestid}/accept','App\Api\V1\Controller\ActivityRequestController@accept');
-    $api->post('activityrequest/{requestid}/reject','App\Api\V1\Controller\ActivityRequestController@reject');
+    $api->post('activityrequest/{activity}/request','App\Api\V1\Controllers\ActivityRequestController@request');
+    $api->post('activityrequest/{requestid}/accept','App\Api\V1\Controllers\ActivityRequestController@accept');
+    $api->post('activityrequest/{requestid}/reject','App\Api\V1\Controllers\ActivityRequestController@reject');
 });

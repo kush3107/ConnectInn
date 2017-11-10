@@ -33,6 +33,8 @@ class ActivityRequestService
     {
 
         $activity = Activity::find($activityId);
+        dd($activity->users());
+
         if ($activity->users()->wherePivot('user_id', $senderId)->exists()) {
             throw new UserAlreadyInActivityException();
         }

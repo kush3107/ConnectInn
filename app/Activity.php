@@ -72,4 +72,8 @@ class Activity extends Model
     {
         return $this->hasMany(Invitation::class);
     }
+
+    public function activityrequests(){
+        return $this->hasMany(ActivityRequest::class);
+    }
 }

@@ -122,4 +122,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(Invitation::class, 'user_id');
     }
+
+    public function sentRequests(){
+        return $this->hasMany(ActivityRequest::class,'sender_id');
+    }
+
 }

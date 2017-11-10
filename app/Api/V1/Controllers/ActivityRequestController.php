@@ -9,8 +9,11 @@
 namespace App\Api\V1\Controllers;
 
 
-use App\ActivityRequest;
+
+use App\Activity;
 use App\Services\ActivityRequestService;
+use App\Services\ActivityService;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class ActivityRequestController extends Controller
 {
@@ -24,17 +27,21 @@ class ActivityRequestController extends Controller
 
     public function request($activityId){
 
-        $activityrequest = ActivityRequestService::find($activityId);
-        if(!is_null($activityrequest)){
-            $this->activityrequestService->create(\Auth::id(),$activityId);
-        }
+        $activity = ActivityService::find($activityId);
+
+        $var = $this->activityrequestService->create(\Auth::id(),$activity);
+
+        dd($var);
+
     }
 
     public function accept($activityrequest){
 
         $activityrequest = ActivityRequestService::find($activityrequest);
 
-        if($activityrequest->sender->id!=\Auth::id()){
+        $activity = Activity::find($activityrequest->activity->id);
+
+        if(!$activity->isOwner(\Auth::user())){
             throw new UnauthorizedHttpException('You are not authorized for the action');
         }
 
@@ -43,6 +50,8 @@ class ActivityRequestController extends Controller
     }
 
     public function reject($activityrequest){
+
+
 
         $this->activityrequestService->reject($activityrequest);
     }
