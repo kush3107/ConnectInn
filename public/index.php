@@ -1,4 +1,20 @@
 <?php
+header("Access-Control-Allow-Origin: *");
+header('Access-Control-Allow-Credentials: true');
+header('Access-Control-Max-Age: 86400');
+
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+
+    header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, PATCH, DELETE");
+
+    if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS'])) {
+        header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
+    } else {
+        header("Access-Control-Allow-Headers:  Authorization, X-Requested-With, Content-Type, Accept");
+    }
+
+    exit(0);
+}
 
 /**
  * Laravel - A PHP Framework For Web Artisans
