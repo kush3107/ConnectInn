@@ -13,6 +13,8 @@ use App\Api\V1\Exceptions\InvalidCredentialsException;
 use App\Api\V1\Requests\Request;
 use App\Api\V1\Transformers\UserTransformer;
 use App\User;
+use Carbon\Carbon;
+use DB;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -44,6 +46,13 @@ class AuthController extends Controller
         $userTransformer = new UserTransformer();
 
         $transformedUser = $userTransformer->transform($user);
+
+        DB::table('user_tokens')->insert([
+            'user_id' => $user->id,
+            'token' => $token,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
 
         return [
             'token' => $token,
