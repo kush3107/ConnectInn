@@ -19,6 +19,7 @@ use App\Services\UserService;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
+use Tymon\JWTAuth\JWT;
 
 class UserController extends Controller
 {
@@ -37,7 +38,13 @@ class UserController extends Controller
 
         $user = $this->userService->create($request);
 
-        return $this->response->item($user, new UserTransformer());
+        $transformedUser = (new UserTransformer())->transform($user);
+        $token = JWT::fromUser($user);
+
+        return [
+            'token' => $token,
+            'user' => $transformedUser
+        ];
     }
 
     public function follow($user)
