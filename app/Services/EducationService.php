@@ -33,14 +33,14 @@ class EducationService
 
         $education = new Education();
 
-        $education->school = $contract->getSchool();
-        $education->user_id = $user->id;
-        $education->degree = $contract->getDegree();
-        $education->grade_type = $contract->getGradeType();
-        $education->grade = $contract->getGrade();
-        $education->location = $contract->getLocation();
-        $education->start = $contract->getStart();
-        $education->end = $contract->getEnd();
+        $education->school      = $contract->getSchool();
+        $education->user_id     = $user->id;
+        $education->degree      = $contract->getDegree();
+        $education->grade_type  = $contract->getGradeType();
+        $education->grade       = $contract->getGrade();
+        $education->location    = $contract->getLocation();
+        $education->start       = $contract->getStart();
+        $education->end         = $contract->getEnd();
 
         $education->save();
 

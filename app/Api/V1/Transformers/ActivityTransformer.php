@@ -10,6 +10,7 @@ namespace App\Api\V1\Transformers;
 
 
 use App\Activity;
+use App\Helpers;
 use League\Fractal\TransformerAbstract;
 
 class ActivityTransformer extends TransformerAbstract
@@ -25,8 +26,8 @@ class ActivityTransformer extends TransformerAbstract
             'type'          => $activity->type,
             'title'         => $activity->title,
             'description'   => $activity->description,
-            'start'         => $activity->start->toDateTimeString(),
-            'end'           => $activity->end ? $activity->end->toDateTimeString() : null,
+            'start'         => Helpers::nullOrDateTimeString($activity->start),
+            'end'           => Helpers::nullOrDateTimeString($activity->end),
             'status'        => $status,
             'link'          => $activity->link,
             'meta'          => json_decode($activity->meta),

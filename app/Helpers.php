@@ -66,7 +66,7 @@ class Helpers
     /**
      * Return null or string
      *
-     * @param Carbon $value
+     * @param $value
      * @return null|string
      */
     public static function nullOrDateTimeString($value)
