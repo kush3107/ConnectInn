@@ -59,4 +59,20 @@ class AuthController extends Controller
             'user' => $transformedUser
         ];
     }
+
+    public function logout(Request $request) {
+        $this->validate($request, [
+            'token' => 'required'
+        ]);
+
+        $token = $request->get('token');
+
+        $user = \Auth::user();
+
+        JWTAuth::invalidate($token);
+
+        DB::table('user_tokens')->where('token', $token)
+            ->where('user_id', $user->id)
+            ->delete();
+    }
 }
