@@ -41,6 +41,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Invitation[] $pendingInvitations
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Invitation[] $sentInvitations
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\ActivityRequest[] $sentRequests
  */
 class User extends Authenticatable implements JWTSubject
 {

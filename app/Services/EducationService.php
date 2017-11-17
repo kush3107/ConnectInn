@@ -9,7 +9,6 @@
 namespace App\Services;
 
 
-use App\Api\V1\Requests\EducationUpdateRequest;
 use App\Contracts\EducationCreateContract;
 use App\Contracts\EducationUpdateContract;
 use App\Education;
@@ -18,7 +17,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class EducationService
 {
-    public function find($id){
+    public static function find($id)
+    {
         $education = Education::find($id);
 
         if (is_null($education)) {
@@ -28,9 +28,10 @@ class EducationService
         return $education;
     }
 
-    public function create(EducationCreateContract $contract,User $user){
+    public function create(EducationCreateContract $contract, User $user)
+    {
 
-        $education  = new Education();
+        $education = new Education();
 
         $education->school = $contract->getSchool();
         $education->degree = $contract->getDegree();
@@ -46,12 +47,13 @@ class EducationService
         return $education;
     }
 
-    public function update(EducationUpdateContract $contract,$education){
+    public function update(EducationUpdateContract $contract, $education)
+    {
 
         $education = EducationService::find($education);
 
-        if($contract->hasSchool())
-        $education->school = $contract->getSchool();
+        if ($contract->hasSchool())
+            $education->school = $contract->getSchool();
 
         $education->save();
 
@@ -59,7 +61,8 @@ class EducationService
 
     }
 
-    public function delete($education){
+    public function delete($education)
+    {
 
         $education = EducationService::find($education);
         $education->delete();

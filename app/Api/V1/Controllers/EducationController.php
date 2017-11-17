@@ -43,7 +43,6 @@ class EducationController extends Controller
 
         $this->educationService->delete($education);
 
-
     }
 
 }

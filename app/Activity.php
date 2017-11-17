@@ -32,6 +32,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Activity whereUpdatedAt($value)
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Invitation[] $invitations
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\ActivityRequest[] $activityrequests
  */
 class Activity extends Model
 {
