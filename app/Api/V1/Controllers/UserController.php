@@ -63,7 +63,7 @@ class UserController extends Controller
 
     public function update(UserUpdateRequest $request)
     {
-        $user = Auth::User();
+        $user = Auth::user();
 
         $user = $this->userService->update($request, $user);
 
@@ -72,7 +72,7 @@ class UserController extends Controller
 
     public function show()
     {
-        $user = Auth::User();
+        $user = Auth::user();
 
         return $this->response->item($user, new UserTransformer());
     }
