@@ -15,6 +15,7 @@ use App\Api\V1\Transformers\UserTransformer;
 use App\User;
 use Carbon\Carbon;
 use DB;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -32,7 +33,7 @@ class AuthController extends Controller
         $user = User::where('email', $request->get('email'))->first();
 
         if (is_null($user)) {
-            dd('asd');
+            throw new NotFoundHttpException('User Not found!');
         }
 
         try {
