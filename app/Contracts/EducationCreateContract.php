@@ -13,8 +13,6 @@ interface EducationCreateContract{
 
     public function hasEnd();
 
-    public function getField();
-
     public function getGradeType();
 
     public function getGrade();

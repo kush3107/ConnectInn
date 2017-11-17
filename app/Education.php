@@ -37,6 +37,13 @@ class Education extends Model
 {
     protected $table = 'educations';
 
+    protected $dates = [
+        'start',
+        'end',
+        'created_at',
+        'updated_at'
+    ];
+
     //
     public function users(){
         $this->belongsTo(User::class);

@@ -41,4 +41,7 @@ $api->version('v1', ['middleware' => 'api.auth'], function ($api) {
     $api->post('activities/{activity}/request','App\Api\V1\Controllers\ActivityRequestController@request');
     $api->post('activity-requests/{request}/accept','App\Api\V1\Controllers\ActivityRequestController@accept');
     $api->post('activity-requests/{request}/reject','App\Api\V1\Controllers\ActivityRequestController@reject');
+
+    // Education Related
+    $api->resource('educations', 'App\Api\V1\Controllers\EducationController');
 });

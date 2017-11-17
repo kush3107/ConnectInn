@@ -9,6 +9,8 @@
 namespace App;
 
 
+use Carbon\Carbon;
+
 class Helpers
 {
     /**
@@ -59,6 +61,21 @@ class Helpers
     public static function nullOrBool($value)
     {
         return ($value === null) ? null : (bool)$value;
+    }
+
+    /**
+     * Return null or string
+     *
+     * @param Carbon $value
+     * @return null|string
+     */
+    public static function nullOrDateTimeString($value)
+    {
+        if (! $value instanceof Carbon && !is_null($value)) {
+            $value = Carbon::parse($value);
+        }
+
+        return is_null($value) ? null : $value->toDateTimeString();
     }
 
     /**

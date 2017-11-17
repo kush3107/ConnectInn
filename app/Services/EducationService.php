@@ -34,8 +34,8 @@ class EducationService
         $education = new Education();
 
         $education->school = $contract->getSchool();
+        $education->user_id = $user->id;
         $education->degree = $contract->getDegree();
-        $education->field_of_study = $contract->getField();
         $education->grade_type = $contract->getGradeType();
         $education->grade = $contract->getGrade();
         $education->location = $contract->getLocation();
@@ -52,8 +52,9 @@ class EducationService
 
         $education = EducationService::find($education);
 
-        if ($contract->hasSchool())
+        if ($contract->hasSchool()) {
             $education->school = $contract->getSchool();
+        }
 
         $education->save();
 
@@ -63,10 +64,9 @@ class EducationService
 
     public function delete($education)
     {
-
         $education = EducationService::find($education);
-        $education->delete();
 
+        $education->delete();
     }
 
 }

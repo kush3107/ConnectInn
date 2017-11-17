@@ -18,7 +18,6 @@ class CreateEducationTable extends Migration
             $table->unsignedInteger('user_id');
             $table->string('school');
             $table->string('degree');
-            $table->string('field_of_study');
             $table->enum('grade_type',
                 [
                     'cgpa',
@@ -42,6 +41,6 @@ class CreateEducationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('education');
+        Schema::dropIfExists('educations');
     }
 }
