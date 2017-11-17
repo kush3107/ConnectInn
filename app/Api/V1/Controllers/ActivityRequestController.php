@@ -32,25 +32,23 @@ class ActivityRequestController extends Controller
         $this->activityrequestService->create(\Auth::id(), $activity);
     }
 
-    public function accept($activityrequest)
+    public function accept($activityRequest)
     {
 
-        $activityrequest = ActivityRequestService::find($activityrequest);
+        $activityRequest = ActivityRequestService::find($activityRequest);
 
-        $activity = Activity::find($activityrequest->activity->id);
+        $activity = Activity::find($activityRequest->activity->id);
 
         if (!$activity->isOwner(\Auth::user())) {
             throw new UnauthorizedHttpException('You are not authorized for the action');
         }
 
-        $this->activityrequestService->accept($activityrequest);
+        $this->activityrequestService->accept($activityRequest);
 
     }
 
-    public function reject($activityrequest)
+    public function reject($activityRequest)
     {
-
-
-        $this->activityrequestService->reject($activityrequest);
+        $this->activityrequestService->reject($activityRequest);
     }
 }

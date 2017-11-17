@@ -18,15 +18,19 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class ActivityRequestService
 {
 
+    /**
+     * @param $id
+     * @return ActivityRequest $activityRequest
+     */
     public static function find($id)
     {
+        $activityRequest = ActivityRequest::find($id);
 
-        $activityrequest = ActivityRequest::find($id);
-        if (is_null($activityrequest)) {
+        if (is_null($activityRequest)) {
             throw new NotFoundHttpException('ActivityRequest Not found');
         }
 
-        return $activityrequest;
+        return $activityRequest;
     }
 
     public function create($senderId, Activity $activity)
@@ -51,23 +55,23 @@ class ActivityRequestService
         return $activityRequest;
     }
 
-    public function accept($activityrequest)
+    public function accept(ActivityRequest $activityRequest)
     {
-        $activity = $activityrequest->activity;
-        $sender = $activityrequest->sender;
+        $activity = $activityRequest->activity;
+        $sender = $activityRequest->sender;
 
         ActivityService::attachUserToActivity($activity->id, $sender->id);
 
-        $activityrequest->delete();
+        $activityRequest->delete();
 
     }
 
-    public function reject($activityrequest)
+    public function reject(ActivityRequest $activityRequest)
     {
 
-        $activityrequest = ActivityRequestService::find($activityrequest);
+        $activityRequest = ActivityRequestService::find($activityRequest);
 
-        $activityrequest->delete();
+        $activityRequest->delete();
     }
 
 }
