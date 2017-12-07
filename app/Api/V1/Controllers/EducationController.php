@@ -47,7 +47,7 @@ class EducationController extends Controller
         return $this->response->item($educationUpdate, new EducationTransformer());
     }
 
-    public function delete($education)
+    public function destroy($education)
     {
         $this->educationService->delete($education);
     }
