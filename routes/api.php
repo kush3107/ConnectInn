@@ -46,4 +46,6 @@ $api->version('v1', ['middleware' => 'api.auth'], function ($api) {
 
     // Education Related
     $api->resource('educations', 'App\Api\V1\Controllers\EducationController');
+
+    $api->post('me/change-password','App\Api\V1\Controllers\UserController@changePassword');
 });

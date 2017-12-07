@@ -32,6 +32,7 @@ class EducationController extends Controller
     public function store(EducationCreateRequest $request)
     {
 
+
         $education = $this->educationService->create($request, Auth::user());
 
         return $this->response->item($education, new EducationTransformer());

@@ -8,10 +8,12 @@
 
 namespace App\Api\V1\Controllers;
 
+use App\Api\V1\Exceptions\OldPasswordNotMatchException;
 use App\Api\V1\Exceptions\UserAlreadyExistsException;
 use App\Api\V1\Requests\UserAddProfilePicRequest;
 use App\Api\V1\Requests\UserCreateRequest;
 use App\Api\V1\Requests\UserUpdateRequest;
+use App\Api\V1\Requests\ChangePasswordRequest;
 use App\Api\V1\Transformers\InvitationTransformer;
 use App\Api\V1\Transformers\UserTransformer;
 use App\Facades\Uploader;
@@ -112,5 +114,22 @@ class UserController extends Controller
         $user->save();
 
         return $this->response->item($user, new UserTransformer);
+    }
+
+    public function changePassword(ChangePasswordRequest $request){
+
+        $user = Auth::user();
+
+
+        if(!\Hash::check($request->getOldPassword(),$user->password)){
+            throw new OldPasswordNotMatchException("Old Password Did Not Match");
+          }
+        else
+        {
+            $user->password = $request->getNewPassword();
+            $user->save();
+            return $this->response->item($user,new UserTransformer);
+
+        }
     }
 }

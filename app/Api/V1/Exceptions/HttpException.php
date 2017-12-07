@@ -15,6 +15,7 @@ class HttpException extends \Symfony\Component\HttpKernel\Exception\HttpExceptio
     const INVITATION_ALREADY_EXISTS_EXCEPTION = 3;
     const USER_ALREADY_IN_ACTIVITY_EXCEPTION = 4;
     const USER_ALREADY_SENT_REQUEST_EXCEPTION = 5;
+    const OLD_PASSWORD_NOT_MATCH_EXCEPTION = 6;
 
     public function __construct($message, $errorCode, $statusCode = 422)
     {

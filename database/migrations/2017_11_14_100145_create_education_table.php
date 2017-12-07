@@ -22,9 +22,9 @@ class CreateEducationTable extends Migration
                 [
                     'cgpa',
                     'percentage'
-                ]);
-            $table->integer('grade');
-            $table->string('location');
+                ])->nullable;
+            $table->integer('grade')->nullable;
+            $table->string('location')->nullable;
             $table->timestamp('start');
             $table->timestamp('end')->nullable();
 
