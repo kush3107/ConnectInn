@@ -45,7 +45,10 @@ $api->version('v1', ['middleware' => 'api.auth'], function ($api) {
     $api->post('activity-requests/{request}/reject','App\Api\V1\Controllers\ActivityRequestController@reject');
 
     // Education Related
-    $api->resource('educations', 'App\Api\V1\Controllers\EducationController');
+    $api->resource('educations', 'App\Api\V1\Controllers\EducationController', ['only' => ['index', 'update', 'store', 'destroy']]);
+
+    // Experience Related
+    $api->resource('experiences', 'App\Api\V1\Controllers\ExperienceController', ['only' => ['index', 'update', 'store', 'destroy']]);
 
     $api->post('me/change-password','App\Api\V1\Controllers\UserController@changePassword');
 });

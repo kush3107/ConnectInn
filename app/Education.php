@@ -32,14 +32,22 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Education whereStart($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Education whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Education whereUserId($value)
+ * @property string $organisation_name
+ * @property string $designation
+ * @property string|null $description
+ * @property string $from
+ * @property string|null $to
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Education whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Education whereDesignation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Education whereFrom($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Education whereOrganisationName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Education whereTo($value)
  */
 class Education extends Model
 {
-    protected $table = 'educations';
+    protected $table = 'experiences';
 
     protected $dates = [
-        'start',
-        'end',
         'created_at',
         'updated_at'
     ];
