@@ -2,6 +2,7 @@
 
 namespace App\Api\V1\Transformers;
 
+use App\Helpers;
 use App\User;
 use League\Fractal\TransformerAbstract;
 
@@ -26,7 +27,7 @@ class UserTransformer extends TransformerAbstract
             'rating'            => $user->rating,
             'profile_pic'       => $user->profile_pic,
             'about'             => $user->about,
-            'date_of_birth'     => $user->date_of_birth ? $user->date_of_birth->toDateTimeString() : null,
+            'date_of_birth'     => Helpers::nullOrDateTimeString($user->date_of_birth),
             'created_at'        => $user->created_at->toDateTimeString(),
             'updated_at'        => $user->updated_at->toDateTimeString()
         ];
