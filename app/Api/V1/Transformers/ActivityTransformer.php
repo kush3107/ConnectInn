@@ -10,7 +10,6 @@ namespace App\Api\V1\Transformers;
 
 
 use App\Activity;
-use App\ActivityRequest;
 use App\Helpers;
 use League\Fractal\TransformerAbstract;
 
@@ -38,14 +37,10 @@ class ActivityTransformer extends TransformerAbstract
     }
 
     public function includeOwner(Activity $activity) {
-        $owner = $activity->users()->wherePivot('is_owner', true)->first();
-
-        return $this->item($owner, new UserTransformer());
+        return $this->item($activity->owner()->first(), new UserTransformer());
     }
 
     public function includeMembers(Activity $activity) {
-        $members = $activity->users()->wherePivot('is_owner', false)->get();
-
-        return $this->collection($members, new UserTransformer());
+        return $this->collection($activity->members, new UserTransformer());
     }
 }

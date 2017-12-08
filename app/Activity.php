@@ -69,6 +69,14 @@ class Activity extends Model
         ])->withTimestamps();
     }
 
+    public function owner() {
+        return $this->belongsToMany(User::class)->wherePivot('is_owner', true);
+    }
+
+    public function members() {
+        return $this->belongsToMany(User::class)->wherePivot('is_owner', false);
+    }
+
     public function invitations()
     {
         return $this->hasMany(Invitation::class);
