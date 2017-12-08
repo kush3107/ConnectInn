@@ -10,12 +10,13 @@ namespace App\Api\V1\Transformers;
 
 
 use App\Activity;
+use App\ActivityRequest;
 use App\Helpers;
 use League\Fractal\TransformerAbstract;
 
 class ActivityTransformer extends TransformerAbstract
 {
-    protected $availableIncludes = ['users'];
+    protected $defaultIncludes = ['owner', 'members'];
 
     public function transform(Activity $activity)
     {
@@ -36,8 +37,15 @@ class ActivityTransformer extends TransformerAbstract
         ];
     }
 
-    public function includeUsers(Activity $activity)
-    {
-        return $this->collection($activity->users, new UserTransformer());
+    public function includeOwner(Activity $activity) {
+        $owner = $activity->users()->wherePivot('is_owner', true)->first();
+
+        return $this->item($owner, new UserTransformer());
+    }
+
+    public function includeMembers(Activity $activity) {
+        $members = $activity->users()->wherePivot('is_owner', false)->get();
+
+        return $this->collection($members, new UserTransformer());
     }
 }
