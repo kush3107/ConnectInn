@@ -31,18 +31,18 @@ class MessagingService
             ->create();
     }
 
-    public function sendMessage($message, $fromUserId, $toUserId)
+    public function sendMessage($message, $channel)
     {
         $db = $this->firebase->getDatabase();
-        $path = $this->getPath($fromUserId, $toUserId);
+        $path = $this->getPath($channel);
         $db->getReference($path)->push([
             'message' => $message,
             'timestamp' => Carbon::now()->timestamp
         ]);
     }
 
-    private function getPath($fromUserId, $toUserId)
+    private function getPath($channel)
     {
-        return self::DB_CHAT_BASE_PATH . '/user_' . $fromUserId . '_' . $toUserId . '/';
+        return self::DB_CHAT_BASE_PATH . '/' . $channel;
     }
 }

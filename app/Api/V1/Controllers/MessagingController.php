@@ -25,9 +25,9 @@ class MessagingController extends Controller
     {
         $this->validate($request, [
             'message' => 'required',
-            'receiver_id' => 'required|exists:users,id'
+            'channel' => 'required'
         ]);
 
-        $this->service->sendMessage($request->get('message'), \Auth::id(), $request->get('receiver_id'));
+        $this->service->sendMessage($request->get('message'), $request->get('channel'));
     }
 }
