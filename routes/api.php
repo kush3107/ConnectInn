@@ -51,4 +51,7 @@ $api->version('v1', ['middleware' => 'api.auth'], function ($api) {
     $api->resource('experiences', 'App\Api\V1\Controllers\ExperienceController', ['only' => ['index', 'update', 'store', 'destroy']]);
 
     $api->post('me/change-password','App\Api\V1\Controllers\UserController@changePassword');
+
+    // Messaging Related
+    $api->post('messages', 'App\Api\V1\Controllers\MessagingController@store');
 });
