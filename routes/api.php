@@ -53,5 +53,6 @@ $api->version('v1', ['middleware' => 'api.auth'], function ($api) {
     $api->post('me/change-password','App\Api\V1\Controllers\UserController@changePassword');
 
     // Messaging Related
-    $api->post('messages', 'App\Api\V1\Controllers\MessagingController@store');
+    $api->post('messages/users', 'App\Api\V1\Controllers\MessagingController@storeUserMessage');
+    $api->post('messages/activities/{activity}', 'App\Api\V1\Controllers\MessagingController@storeActivitiesMessage');
 });

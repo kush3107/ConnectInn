@@ -69,6 +69,15 @@ class Activity extends Model
         ])->withTimestamps();
     }
 
+    public function isMember($user)
+    {
+        if (!$user instanceof User) {
+            $user = $user->id;
+        }
+
+        return $this->users()->wherePivot('user_id', $user->id)->exists();
+    }
+
     public function owner() {
         return $this->belongsToMany(User::class)->wherePivot('is_owner', true);
     }

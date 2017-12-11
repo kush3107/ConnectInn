@@ -10,7 +10,9 @@ namespace App\Api\V1\Controllers;
 
 
 use App\Api\V1\Requests\Request;
+use App\Services\ActivityService;
 use App\Services\MessagingService;
+use Illuminate\Validation\UnauthorizedException;
 
 class MessagingController extends Controller
 {
@@ -21,13 +23,29 @@ class MessagingController extends Controller
         $this->service = new MessagingService();
     }
 
-    public function store(Request $request)
+    public function storeUserMessage(Request $request)
     {
         $this->validate($request, [
             'message' => 'required',
             'channel' => 'required'
         ]);
 
-        $this->service->sendMessage($request->get('message'), $request->get('channel'));
+        $this->service->sendUserMessage($request->get('message'), $request->get('channel'));
+    }
+
+    public function storeActivitiesMessage(Request $request, $activity)
+    {
+        $this->validate($request, [
+            'message' => 'required'
+        ]);
+
+        $activity = ActivityService::find($activity);
+
+        if (!($activity->isOwner(\Auth::user()) || $activity->isMember(\Auth::user()))) {
+            throw new UnauthorizedException('You are not authorized');
+        }
+
+        $channel = 'activity_' . $activity->id;
+        $this->service->sendActivityMessage($request->get('message'), $channel, \Auth::id());
     }
 }
