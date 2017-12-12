@@ -12,6 +12,7 @@ namespace App\Api\V1\Controllers;
 use App\Api\V1\Requests\Request;
 use App\Services\ActivityService;
 use App\Services\MessagingService;
+use Auth;
 use Illuminate\Validation\UnauthorizedException;
 
 class MessagingController extends Controller
