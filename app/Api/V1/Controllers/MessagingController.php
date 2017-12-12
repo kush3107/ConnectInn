@@ -30,7 +30,7 @@ class MessagingController extends Controller
             'channel' => 'required'
         ]);
 
-        $this->service->sendUserMessage($request->get('message'), $request->get('channel'));
+        $this->service->sendUserMessage($request->get('message'), $request->get('channel'), Auth::id());
     }
 
     public function storeActivitiesMessage(Request $request, $activity)

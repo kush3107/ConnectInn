@@ -31,13 +31,14 @@ class MessagingService
             ->create();
     }
 
-    public function sendUserMessage($message, $channel)
+    public function sendUserMessage($message, $channel, $senderId)
     {
         $db = $this->firebase->getDatabase();
         $path = $this->getPath($channel);
         $db->getReference($path)->push([
             'message' => $message,
-            'timestamp' => Carbon::now()->timestamp
+            'timestamp' => Carbon::now()->timestamp,
+            'sender_id' => $senderId
         ]);
     }
 
