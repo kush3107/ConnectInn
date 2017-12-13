@@ -45,7 +45,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Education extends Model
 {
-    protected $table = 'experiences';
+    protected $table = 'educations';
 
     protected $dates = [
         'created_at',
