@@ -29,7 +29,7 @@ $api->version('v1', ['middleware' => 'api.auth'], function ($api) {
     $api->get('followers', 'App\Api\V1\Controllers\UserController@listFollowers');
     //
     $api->get('me','App\Api\V1\Controllers\UserController@show');
-    $api->patch('me','App\Api\V1\Controllers\UserController@update');
+    $api->put('me','App\Api\V1\Controllers\UserController@update');
     $api->post('me/profile-pic','App\Api\V1\Controllers\UserController@uploadProfilePic');
     $api->get('me/pending-invitations','App\Api\V1\Controllers\UserController@pendingInvitations');
     $api->get('me/sent-invitations','App\Api\V1\Controllers\UserController@sentInvitations');
