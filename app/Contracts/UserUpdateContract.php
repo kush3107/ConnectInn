@@ -12,4 +12,16 @@ interface UserUpdateContract{
 
     public function hasName();
     public function getName();
+
+    public function hasDateOfBirth();
+    public function getDateOfBirth();
+
+    public function hasPhone();
+    public function getPhone();
+
+    public function hasAbout();
+    public function getAbout();
+
+    public function hasAttributes();
+    public function getAttributes();
 }

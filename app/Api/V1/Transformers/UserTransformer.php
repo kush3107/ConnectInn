@@ -17,6 +17,8 @@ class UserTransformer extends TransformerAbstract
 {
     protected $availableIncludes = ['activities'];
 
+    protected $defaultIncludes = ['attributes'];
+
     public function transform(User $user)
     {
         return [
@@ -36,5 +38,10 @@ class UserTransformer extends TransformerAbstract
     public function includeActivities(User $user)
     {
         return $this->collection($user->activities, new ActivityTransformer());
+    }
+
+    public function includeAttributes(User $user)
+    {
+        return $this->collection($user->attributes, new AttributeTransformer());
     }
 }
