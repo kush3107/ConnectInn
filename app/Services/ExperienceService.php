@@ -58,6 +58,31 @@ class ExperienceService
         $experience = ExperienceService::find($experience);
 
 
+        if($contract->hasOrganisationName()){
+            $experience->organisation_name  =   $contract->getOrganisationName();
+        }
+
+        if ($contract->hasDesignation()){
+            $experience->designation        =   $contract->getDesignation();
+        }
+
+        if ($contract->hasDescription()){
+            $experience->description    =   $contract->getDescription();
+        }
+
+        if($contract->hasFrom()){
+            $experience->from               =   $contract->getFrom();
+        }
+
+        if($contract->hasTo()){
+            $experience->to             =   $contract->getTo();
+        }
+
+        if($contract->hasLocation()){
+            $experience->location           =   $contract->getLocation();
+        }
+
+
 
         $experience->save();
 
