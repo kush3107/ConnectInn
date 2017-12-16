@@ -31,8 +31,6 @@ class ExperienceController extends Controller
 
     public function store(ExperienceCreateRequest $request)
     {
-
-
         $experience = $this->experienceService->create($request, Auth::user());
 
         return $this->response->item($experience, new ExperienceTransformer());

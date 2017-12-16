@@ -33,6 +33,8 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Invitation[] $invitations
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\ActivityRequest[] $activityrequests
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $members
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $owner
  */
 class Activity extends Model
 {

@@ -41,7 +41,7 @@ class Experience extends Model
     ];
 
     //
-    public function users(){
+    public function user(){
         $this->belongsTo(User::class);
     }
 }

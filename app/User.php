@@ -43,6 +43,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Invitation[] $sentInvitations
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\ActivityRequest[] $sentRequests
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Education[] $educations
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Experience[] $experiences
  */
 class User extends Authenticatable implements JWTSubject
 {
@@ -131,6 +132,10 @@ class User extends Authenticatable implements JWTSubject
 
     public function educations() {
         return $this->hasMany(Education::class);
+    }
+
+    public function experiences() {
+        return $this->hasMany(Experience::class);
     }
 
 }
