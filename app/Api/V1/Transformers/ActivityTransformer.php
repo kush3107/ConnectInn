@@ -31,7 +31,7 @@ class ActivityTransformer extends TransformerAbstract
             'end' => Helpers::nullOrDateTimeString($activity->end),
             'status' => $status,
             'link' => $activity->link,
-            'meta' => json_decode($activity->meta),
+            'meta' => json_encode($activity->meta),
             'created_at' => $activity->created_at->toDateTimeString(),
             'updated_at' => $activity->updated_at->toDateTimeString(),
         ];
