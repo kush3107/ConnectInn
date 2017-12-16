@@ -23,6 +23,7 @@ class ActivityUpdateRequest extends Request implements ActivityUpdateContract
     const TYPE = 'type';
     const LINK = 'link';
     const META = 'meta';
+    const TAGS = 'tags';
 
     public function authorize()
     {
@@ -40,7 +41,9 @@ class ActivityUpdateRequest extends Request implements ActivityUpdateContract
             self::START => 'date',
             self::END => 'date|after:' . self::START,
             self::LINK => 'active_url',
-            self::META => 'json'
+            self::META => 'json',
+            self::TAGS => 'array',
+            self::TAGS . '.*' => 'exists:tags,id'
         ];
     }
 
@@ -105,4 +108,13 @@ class ActivityUpdateRequest extends Request implements ActivityUpdateContract
         return $this->has(self::START);
     }
 
+    public function hasTags()
+    {
+        return $this->has(self::TAGS);
+    }
+
+    public function getTags()
+    {
+        return $this->get(self::TAGS);
+    }
 }

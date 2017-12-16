@@ -21,6 +21,7 @@ class ActivityCreateRequest extends Request implements ActivityCreateContract
     const TYPE = 'type';
     const LINK = 'link';
     const META = 'meta';
+    const TAGS = 'tags';
 
     public function rules()
     {
@@ -30,7 +31,9 @@ class ActivityCreateRequest extends Request implements ActivityCreateContract
             self::END => 'date|after:' . self::START,
             self::TYPE => 'required|in:project,competition,seminar,workshop,guest_lecture,co_curricular,certification,training,other,volunteer,publication',
             self::LINK => 'active_url',
-            self::META => 'json'
+            self::META => 'json',
+            self::TAGS => 'array',
+            self::TAGS . '.*' => 'exists:tags,id'
         ];
     }
 
@@ -72,5 +75,15 @@ class ActivityCreateRequest extends Request implements ActivityCreateContract
     public function getMeta()
     {
         return $this->get(self::META, []);
+    }
+
+    public function hasTags()
+    {
+        return $this->has(self::TAGS);
+    }
+
+    public function getTags()
+    {
+        return $this->get(self::TAGS);
     }
 }

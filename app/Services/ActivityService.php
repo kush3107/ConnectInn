@@ -56,6 +56,10 @@ class ActivityService
 
         $activity->save();
 
+        if ($contract->hasTags()) {
+            $activity->tags()->sync($contract->getTags());
+        }
+
         ActivityService::attachUserToActivity($activity->id, $user->id, 'owner', true);
 
         return $activity;
@@ -96,6 +100,10 @@ class ActivityService
 
         if($contract->hasMeta()){
             $activity->meta = $contract->getMeta();
+        }
+
+        if ($contract->hasTags()) {
+            $activity->tags()->sync($contract->getTags());
         }
 
         $activity->save();

@@ -24,4 +24,7 @@ interface ActivityCreateContract
     public function getLink();
 
     public function getMeta();
+
+    public function hasTags();
+    public function getTags();
 }

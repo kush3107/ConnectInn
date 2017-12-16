@@ -29,4 +29,7 @@ interface ActivityUpdateContract
     public function hasMeta();
     public function getMeta();
 
+    public function hasTags();
+    public function getTags();
+
 }

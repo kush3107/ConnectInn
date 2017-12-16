@@ -35,6 +35,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\ActivityRequest[] $activityrequests
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $members
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $owner
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Tag[] $tags
  */
 class Activity extends Model
 {
@@ -95,5 +96,10 @@ class Activity extends Model
 
     public function activityrequests(){
         return $this->hasMany(ActivityRequest::class);
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class)->withTimestamps();
     }
 }
