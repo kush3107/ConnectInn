@@ -56,6 +56,27 @@ class EducationService
             $education->school = $contract->getSchool();
         }
 
+        if($contract->hasDegree()){
+            $education->degree      = $contract->getDegree();
+        }
+
+        if($contract->hasGrade()){
+            $education->grade       = $contract->getGrade();
+        }
+
+        if($contract->hasGradeType()){
+            $education->grade_type  = $contract->getGradeType();
+        }
+
+        if($contract->hasStart()){
+            $education->start       = $contract->getStart();
+        }
+
+        if($contract->hasEnd()){
+            $education->end         = $contract->getEnd();
+
+        }
+
         $education->save();
 
         return $education;
