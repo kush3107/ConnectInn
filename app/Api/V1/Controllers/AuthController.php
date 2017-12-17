@@ -45,6 +45,7 @@ class AuthController extends Controller
         }
 
         $userTransformer = new UserTransformer();
+        $userTransformer->setAvailableIncludes(['following']);
 
         $transformedUser = $userTransformer->transform($user);
 
