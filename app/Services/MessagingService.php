@@ -9,6 +9,7 @@
 namespace App\Services;
 
 
+use App\User;
 use Auth;
 use Carbon\Carbon;
 use Curl\Curl;
@@ -31,14 +32,18 @@ class MessagingService
             ->create();
     }
 
-    public function sendUserMessage($message, $channel, $senderId)
+    public function sendUserMessage($message, $channel, User $sender)
     {
         $db = $this->firebase->getDatabase();
         $path = $this->getPath($channel);
         $db->getReference($path)->push([
             'message' => $message,
             'timestamp' => Carbon::now()->timestamp,
-            'sender_id' => $senderId
+            'sender' => [
+                'id' => $sender->id,
+                'name' => $sender->name,
+                'email' => $sender->email
+            ]
         ]);
     }
 
