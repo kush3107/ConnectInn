@@ -15,7 +15,7 @@ use League\Fractal\TransformerAbstract;
 
 class UserTransformer extends TransformerAbstract
 {
-    protected $availableIncludes = ['activities'];
+    protected $availableIncludes = ['activities', 'following'];
 
     protected $defaultIncludes = ['attributes'];
 
@@ -43,5 +43,10 @@ class UserTransformer extends TransformerAbstract
     public function includeAttributes(User $user)
     {
         return $this->collection($user->attributes, new AttributeTransformer());
+    }
+
+    public function includeFollowing(User $user)
+    {
+        return $this->collection($user->following, new UserTransformer());
     }
 }
