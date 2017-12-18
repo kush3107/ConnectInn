@@ -14,6 +14,7 @@ use App\Api\V1\Requests\ActivityUpdateRequest;
 use App\Api\V1\Transformers\ActivityTransformer;
 use App\Services\ActivityService;
 use Auth;
+use Illuminate\Validation\UnauthorizedException;
 
 class ActivityController extends Controller
 {
@@ -43,5 +44,16 @@ class ActivityController extends Controller
         $activityUpdate = $this->activityService->update($request, $activity);
 
         return $this->response->item($activityUpdate, new ActivityTransformer());
+    }
+
+    public function destroy($activity)
+    {
+        $activity = ActivityService::find($activity);
+
+        if (!$activity->isOwner(Auth::user())) {
+            throw new UnauthorizedException('You are not authorised');
+        }
+
+        $activity->delete();
     }
 }
