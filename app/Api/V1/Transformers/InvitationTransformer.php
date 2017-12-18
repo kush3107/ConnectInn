@@ -14,12 +14,15 @@ use League\Fractal\TransformerAbstract;
 
 class InvitationTransformer extends TransformerAbstract
 {
-    protected $defaultIncludes = ['activity', 'sender', 'receiver'];
+    protected $defaultIncludes = ['sender', 'receiver'];
 
     public function transform(Invitation $invitation)
     {
         return [
             'id' => (int)$invitation->id,
+            'activity_id' => (int)$invitation->activity_id,
+            'sender_id' => (int)$invitation->sender_id,
+            'receiver_id' => (int)$invitation->user_id,
             'created_at' => $invitation->created_at->toDateTimeString(),
             'updated_at' => $invitation->updated_at->toDateTimeString()
         ];

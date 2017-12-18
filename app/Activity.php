@@ -32,7 +32,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Activity whereUpdatedAt($value)
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Invitation[] $invitations
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\ActivityRequest[] $activityrequests
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\ActivityRequest[] requests
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $members
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $owner
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Tag[] $tags
@@ -94,7 +94,7 @@ class Activity extends Model
         return $this->hasMany(Invitation::class);
     }
 
-    public function activityrequests(){
+    public function requests(){
         return $this->hasMany(ActivityRequest::class);
     }
 

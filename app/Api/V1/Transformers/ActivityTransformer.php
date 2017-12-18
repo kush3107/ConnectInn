@@ -16,7 +16,7 @@ use League\Fractal\TransformerAbstract;
 class ActivityTransformer extends TransformerAbstract
 {
     protected $availableIncludes = ['owner', 'members'];
-    protected $defaultIncludes = ['tags'];
+    protected $defaultIncludes = ['tags', 'invitations', 'requests'];
 
     public function transform(Activity $activity)
     {
@@ -50,5 +50,15 @@ class ActivityTransformer extends TransformerAbstract
     public function includeTags(Activity $activity)
     {
         return $this->collection($activity->tags, new TagTransformer());
+    }
+
+    public function includeRequests(Activity $activity)
+    {
+        return $this->collection($activity->requests, new ActivityRequestTransformer());
+    }
+
+    public function includeInvitations(Activity $activity)
+    {
+        return $this->collection($activity->invitations, new InvitationTransformer());
     }
 }
